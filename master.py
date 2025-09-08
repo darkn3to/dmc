@@ -56,7 +56,7 @@ stop_flag = True
 with open("nodes.txt", "w") as f:
     f.write(f"[Master]: {master_ip()}\n")
     for w in workers:
-        f.write(f"[Worker]: {w[0]}\n")
+        f.write(f"[Worker]: {w}\n")
 
 
 with open("nodes.txt", "rb") as f:
