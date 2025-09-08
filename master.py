@@ -28,6 +28,7 @@ def discover_workers_daemon():
         if addr[0] not in workers:
             workers.add(addr[0])
             print(f"[Master] New worker {addr[0]} says: {message}")
+            #print(f"[Master] Port: {addr[1]}")
         sock.sendto(b"ACK", addr)
 
 t=threading.Thread(target=discover_workers_daemon, daemon=True)
@@ -50,12 +51,22 @@ print("[Master] Waiting 15 seconds for workers to join...")
 time.sleep(15)
 
 stop_flag = True
-sock.close()   # force recvfrom() to break
 
 # after 15s, write discovered nodes into file
 with open("nodes.txt", "w") as f:
     f.write(f"[Master]: {master_ip()}\n")
     for w in workers:
-        f.write(f"[Worker]: {w}\n")
+        f.write(f"[Worker]: {w[0]}\n")
 
-print("[Master] Worker list written to nodes.txt")
+
+with open("nodes.txt", "rb") as f:
+    for w in workers:
+        print(f"[Master] Sending nodes.txt to {w}")
+        sock.sendto(b"FILE_START", (w, PORT))
+        f.seek(0)
+        while chunk := f.read(1024):
+            sock.sendto(chunk, (w, PORT))
+        sock.sendto(b"EOF", (w, PORT))
+sock.close()
+
+print("[Master] Sent nodes.txt to all workers.")
