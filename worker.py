@@ -1,16 +1,16 @@
-import socket, time
+import time, socket
+import utils
+import json
 
 PORT = 50000
 MESSAGE = b"HELLO"
 ACK = b"ACK"
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+sock = utils.sock_init("", PORT, 'w')
 sock.settimeout(2)
-sock.bind(("", PORT))
 
 master_found = False
-master_addr = None  # <--- FIX 1: Initialize the variable here.
+master_addr = None  
 
 while not master_found:
     # send broadcast hello
@@ -21,7 +21,7 @@ while not master_found:
         data, addr = sock.recvfrom(1024)
         if data == ACK:
             print(f"Got ACK from master at {addr}")
-            master_addr = addr  # <--- FIX 2: Save the master's address.
+            master_addr = addr 
             master_found = True
     except socket.timeout:
         print("No ACK, retrying...")
@@ -38,7 +38,7 @@ with open("nodes.txt", "wb") as f:
         if addr != master_addr:
             continue
         if data == b"FILE_START":
-            print("FILE_START received. Receiving file...")
+            print("FILE_START received. Receiving file nodes.txt...")
             break
 
     # receive the actual file
@@ -48,8 +48,25 @@ with open("nodes.txt", "wb") as f:
         if addr != master_addr:
             continue
         if data == b"EOF":
-            print("File transfer complete.")
+            print("nodes.txt transfer complete.")
             break
         f.write(data)
 
+IP = utils.find_own_ip()
+resources = utils.collect_resources(IP)
+resource_file = f"{IP}_resources.json"
+
+# Save resources to a JSON file
+with open(resource_file, "w") as json_file:  
+    json.dump(resources, json_file, indent=4) 
+print("Resources saved to resources.json")
+
+# Send the resource file to the master
+print(f"Sending resource file {resource_file} to master...")
+with open(resource_file, "rb") as f:
+    while chunk := f.read(1024):  # Read the file in chunks
+        sock.sendto(chunk, master_addr)  # Send each chunk to the master
+    sock.sendto(b"EOF", master_addr)  # Send EOF to indicate the end of the file
+
+print("Resource file sent to master.")
 sock.close()

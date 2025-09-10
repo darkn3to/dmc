@@ -1,72 +1,102 @@
-import socket
 import threading
-import time
+import time, socket, os
+import utils, json
 
 PORT = 50000
 BUFFER_SIZE = 1024
 
-#setup a UDP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-#listens to requests on all interfaces (wired OR wireless) on PORT 50000
-sock.bind(("0.0.0.0", PORT))
+# Setup a UDP socket
+sock = utils.sock_init("0.0.0.0", PORT, 'm')
 
 print("[Master] Listening for workers...")
 
-#set for storing discovered workers
+# Set to keep track of discovered workers
 workers = set()
 stop_flag = False
 
-#discover workers by listening for their broadcast messages.
-def discover_workers_daemon():
+# Function to discover workers
+def discover_workers_daemon() -> None:
+    sock.settimeout(1.0)
     while not stop_flag:
         try:
             data, addr = sock.recvfrom(BUFFER_SIZE)
+            message = data.decode().strip()
+            if addr[0] not in workers:
+                workers.add(addr[0])
+                print(f"[Master] New worker {addr[0]} says: {message}")
+            sock.sendto(b"ACK", addr)
+        except socket.timeout:
+            continue
         except OSError:
-            break  # socket closed
-        message = data.decode().strip()
-        if addr[0] not in workers:
-            workers.add(addr[0])
-            print(f"[Master] New worker {addr[0]} says: {message}")
-            #print(f"[Master] Port: {addr[1]}")
-        sock.sendto(b"ACK", addr)
+            break
+    sock.settimeout(None)
+    print("[Master] Worker discovery daemon has stopped.")
 
-t=threading.Thread(target=discover_workers_daemon, daemon=True)
-t.start()
-    
-#find master's IP.
-def master_ip() -> int:
-    s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        #a dummy connection to get Master's local IP; it determines the 
-        # "FROM IP address" in a connection request
-        s.connect(("8.8.8.8", 80))
-        return s.getsockname()[0]
-        #print(f"[Master] IP Address: {ip}")
-    finally:
-        s.close()
+# Function to send a file to workers
+def send_file_to_workers(file_path, workers) -> None:
+    with open(file_path, "rb") as f:
+        for w in workers:
+            print(f"[Master] Sending {file_path} to {w}")
+            sock.sendto(b"FILE_START", (w, PORT))
+            f.seek(0)
+            while chunk := f.read(1024):
+                sock.sendto(chunk, (w, PORT))
+            sock.sendto(b"EOF", (w, PORT))
+    print(f"[Master] Sent {file_path} to all workers.")
 
-# wait 15 seconds for workers to announce themselves
-print("[Master] Waiting 15 seconds for workers to join...")
-time.sleep(15)
+# Function to receive resource files from workers
+def receive_resource_files(workers) -> None:
+    print("[Master] Waiting to receive resource files from workers...")
+    while workers:
+        try:
+            data, addr = sock.recvfrom(BUFFER_SIZE)
+            if addr[0] in workers:
+                filename = f"resources/{addr[0]}_resources.json"
+                with open(filename, "wb") as f:
+                    print(f"[Master] Receiving resource file from {addr[0]}...")
+                    while True:
+                        if data == b"EOF":
+                            print(f"[Master] Finished receiving file from {addr[0]}")
+                            workers.remove(addr[0])
+                            break
+                        f.write(data)
+                        data, addr = sock.recvfrom(BUFFER_SIZE)
+        except socket.timeout:
+            print("[Master] Waiting for workers to send resource files...")
+    print("[Master] All resource files received.")
 
-stop_flag = True
+# Main execution
+if __name__ == "__main__":
+    t = threading.Thread(target=discover_workers_daemon, daemon=True)
+    t.start()
 
-# after 15s, write discovered nodes into file
-with open("nodes.txt", "w") as f:
-    f.write(f"[Master]: {master_ip()}\n")
-    for w in workers:
-        f.write(f"[Worker]: {w}\n")
+    print("[Master] Waiting 15 seconds for workers to join...")
+    time.sleep(15)
+    stop_flag = True
+    # Ensure that discovery daemon has stopped 
+    # to prevent packet theft in receving resources.json
+    t.join()  
 
+    IP = utils.find_own_ip()
+    os.makedirs("resources", exist_ok=True)
 
-with open("nodes.txt", "rb") as f:
-    for w in workers:
-        print(f"[Master] Sending nodes.txt to {w}")
-        sock.sendto(b"FILE_START", (w, PORT))
-        f.seek(0)
-        while chunk := f.read(1024):
-            sock.sendto(chunk, (w, PORT))
-        sock.sendto(b"EOF", (w, PORT))
-sock.close()
+    # Write discovered nodes to file
+    nodes_file = "nodes.txt"
+    with open(nodes_file, "w") as f:
+        f.write(f"[Master]: {IP}\n")
+        for w in workers:
+            f.write(f"[Worker]: {w}\n")
 
-print("[Master] Sent nodes.txt to all workers.")
+    # Send nodes.txt to workers
+    send_file_to_workers(nodes_file, workers)
+
+    # Save master resources
+    resources = utils.collect_resources(IP)
+    with open(f"resources/{IP}_resources.json", "w") as json_file:
+        json.dump(resources, json_file, indent=4)
+    print("[Master] Resources saved to resources.json")
+
+    # Receive resource files from workers
+    receive_resource_files(workers)
+
+    sock.close()
