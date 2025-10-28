@@ -1,0 +1,3 @@
+sudo apt install openmpi-bin libopenmpi-dev python3-mpi4py
+SAVE IN HOME DIRECTORY
+mpirun -np 1 --host localhost python3 /home/$(whoami)/dmc/broadcast.py
