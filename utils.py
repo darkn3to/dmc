@@ -34,6 +34,21 @@ def collect_resources(IP) -> dict:
     }
     return spec
 
+'''
+def generate_mpirun_command(nodes, script_path="broadcast.py") -> str:
+    base = "/usr/bin/mpirun"
+    parts = []
+
+    for i, (user, ip) in enumerate(nodes):
+        host = "localhost" if i == 0 else ip
+        part = f"-np 1 --host {host} python3 /home/{user}/dmc/{script_path}"
+        parts.append(part)
+
+    joined = " : \\\n  ".join(parts)
+    cmd = f"{base} \\\n  {joined}"
+    return cmd
+'''
+
 if __name__ == "__main__":
     resources = collect_resources()
     with open("resources.json", "w") as json_file:  

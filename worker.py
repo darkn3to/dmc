@@ -3,6 +3,7 @@ import time
 import json
 import utils
 import os
+import subprocess
 
 # --- Constants ---
 PORT = 50000
@@ -24,8 +25,9 @@ BROADCAST_COMPLETE_MSG = b"BROADCAST_COMPLETE"
 def discover_master(sock: socket.socket) -> tuple | None:
     """Broadcasts to find the master and returns its address if found."""
     print("Searching for the master...")
+    username = subprocess.run(["whoami"], capture_output=True, text=True).stdout.strip().encode()
     while True:
-        sock.sendto(HELLO_MSG, (BROADCAST_ADDR, PORT))
+        sock.sendto(username, (BROADCAST_ADDR, PORT))
         print("Sent HELLO, waiting for ACK...")
         try:
             data, addr = sock.recvfrom(1024)
