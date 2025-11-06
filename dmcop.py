@@ -52,3 +52,6 @@ class DMCOptimizer(torch.optim.Optimizer):
 
     def zero_grad(self):
         self.optimizer.zero_grad()
+
+if __name__ == "__main__":
+    print(f"DMCOptimizer initialized on rank {rank} out of {size} processes.")
