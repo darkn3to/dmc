@@ -1,4 +1,3 @@
-from matplotlib.pylab import nbytes
 import torch
 from comms import RingCommunicator
 
@@ -33,7 +32,8 @@ class DMCOptimizer(torch.optim.Optimizer):
                         'shape': p.shape,
                         'nbytes': nbytes,
                         'start': START,
-                        'end': START + nbytes
+                        'end': START + nbytes,
+                        'dtype': p.dtype
                     })
                     START += nbytes
 
