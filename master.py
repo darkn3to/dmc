@@ -19,7 +19,7 @@ EOF_MSG = b"EOF"
 RESOURCE_FILE_ACK_MSG = b"RESOURCE_FILE_ACK"
 BROADCAST_COMPLETE_MSG = b"BROADCAST_COMPLETE"
 
-def discover_workers_daemon(sock: socket.socket, workers: dict, stop_event: threading.Event):
+def discover_workers_daemon(sock: socket.socket, workers: dict, stop_event: threading.Event) -> None:
     """Listens for worker broadcasts and adds them to the workers dict {ip: username}."""
     print("[Master] Worker discovery daemon started.")
     sock.settimeout(1.0)
@@ -48,7 +48,7 @@ def discover_workers_daemon(sock: socket.socket, workers: dict, stop_event: thre
     sock.settimeout(None)
     print("[Master] Worker discovery daemon has stopped.")
 
-def send_file_to_workers(sock: socket.socket, filename: str, workers: dict):
+def send_file_to_workers(sock: socket.socket, filename: str, workers: dict) -> None:
     """Sends a single file to every worker in the dict."""
     print(f"[Master] Sending '{filename}' to all workers.")
     if not os.path.exists(filename):
@@ -74,7 +74,7 @@ def send_file_to_workers(sock: socket.socket, filename: str, workers: dict):
             
     print(f"[Master] Finished sending '{filename}'.")
 
-def send_broadcast_files_to_workers(sock: socket.socket, directory: str, workers: dict):
+def send_broadcast_files_to_workers(sock: socket.socket, directory: str, workers: dict) -> None:
     """Sends all files in the broadcast directory to every worker."""
     print(f"[Master] Sending all files in '{directory}' to workers...")
     if not os.path.exists(directory):
@@ -113,7 +113,7 @@ def send_broadcast_files_to_workers(sock: socket.socket, directory: str, workers
                 
         print(f"[Master] Finished broadcasting '{file_name}'.")
 
-def receive_resource_files(sock: socket.socket, workers: dict):
+def receive_resource_files(sock: socket.socket, workers: dict) -> None:
     """
     Waits for, receives, and confirms resource files from any expected worker.
     """
