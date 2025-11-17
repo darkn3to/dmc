@@ -38,7 +38,7 @@ def discover_master(sock: socket.socket) -> tuple | None:
             print("No ACK from master, retrying...")
         time.sleep(2)
 
-def receive_file(sock: socket.socket, expected_addr: tuple, filename: str):
+def receive_file(sock: socket.socket, expected_addr: tuple, filename: str) -> None:
     """Receives a file from a specific address."""
     print(f"Waiting for file '{filename}' from master...")
     with open(filename, "wb") as f:
@@ -55,7 +55,7 @@ def receive_file(sock: socket.socket, expected_addr: tuple, filename: str):
                     break
                 f.write(data)
 
-def receive_broadcast_files(sock: socket.socket, master_addr: tuple):
+def receive_broadcast_files(sock: socket.socket, master_addr: tuple) -> None:
     """Receives broadcasted files from the master."""
     os.makedirs(RESOURCES_DIR, exist_ok=True)
     print(f"[Worker] Listening for broadcasted files from master {master_addr[0]}...")
@@ -105,7 +105,7 @@ def receive_broadcast_files(sock: socket.socket, master_addr: tuple):
         except Exception as e:
             print(f"[Worker] Error: {e}")
 
-def send_file_with_retransmission(sock: socket.socket, recipient_addr: tuple, filename: str):
+def send_file_with_retransmission(sock: socket.socket, recipient_addr: tuple, filename: str) -> None:
     """Sends a file and waits for a confirmation ACK, with retransmissions."""
     print(f"Sending file '{filename}' to master with confirmation...")
 
