@@ -8,7 +8,7 @@ PARAMETERS_ASSIGNED = False
 
 class DMCOptimizer(torch.optim.Optimizer):
     """A wrapper around the optimizer used by user to perform all-reduce on gradients before parameter update. """
-    def __init__(self, optimizer, grad_staleness):
+    def __init__(self, optimizer, grad_staleness, debug=False):
         self.optimizer = optimizer
         self.grad_staleness = grad_staleness
         self.step_count = 0
@@ -17,7 +17,7 @@ class DMCOptimizer(torch.optim.Optimizer):
         for g in optimizer.param_groups:
             params.extend(g['params'])
         self.all_params = params # Store the collected parameters
-        self.comm = RingCommunicator()
+        self.comm = RingCommunicator(debug=debug)
 
     def step(self) -> None:
         global METADATA_AVAIL, START, PARAMETERS_ASSIGNED # Declare METADATA_AVAIL and START as global here
