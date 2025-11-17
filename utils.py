@@ -1,6 +1,7 @@
 import json
 import psutil
 import socket
+import sys
 from math import ceil
 
 def sock_init(IP, PORT, MODE) -> socket.socket: 
@@ -23,6 +24,10 @@ def find_own_ip() -> int:
     finally:
         s.close()
 
+def get_python_path() -> str:
+    """Returns the path to the Python executable being used."""
+    return sys.executable
+
 def collect_resources(IP) -> dict:
     print("Collecting System Resources...")
     storage = int(input("Enter storage amount in GBs you would like to allocate for data storage: "))
@@ -30,7 +35,8 @@ def collect_resources(IP) -> dict:
         "worker_IP": IP,
         "cpus": psutil.cpu_count(logical=True),
         "ram": ceil(psutil.virtual_memory().total / (1073741824)),
-        "storage": storage
+        "storage": storage,
+        "python_path": get_python_path()
     }
     return spec
 
