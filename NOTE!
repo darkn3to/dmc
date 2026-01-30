@@ -1,4 +1,4 @@
-sudo apt install openmpi-bin libopenmpi-dev python3-mpi4py
+sudo apt install openmpi-bin libopenmpi-dev mpi4py
 SAVE IN HOME DIRECTORY
 /usr/bin/mpirun \
   -np 1 --host localhost python3 /home/maverick/dmc/broadcast.py : \
