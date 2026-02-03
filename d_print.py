@@ -53,7 +53,7 @@ class DMC(torch.optim.Optimizer):
         self.tau_max = 100
 
         # Hard cap on max local steps to avoid local divergence.
-        self.max_local_steps = 500
+        self.max_local_steps = 7
 
     def _log(self, *args, rank0_only=False) -> None:
         message = " ".join(map(str, args))
@@ -103,7 +103,7 @@ class DMC(torch.optim.Optimizer):
 
         if self.step_count % self.tau != 0 and self.rank == 0:
             if self.debug:
-                self.logger.log("[INFO] local step, no sync")
+                print("[INFO] local step, no sync")
             
             '''
             with torch.no_grad():
@@ -116,7 +116,7 @@ class DMC(torch.optim.Optimizer):
         if self.step_count % self.max_local_steps == 0:
             if self.rank == 0:
                 if self.debug:
-                    self.logger.log(f"[CAP SYNC] step={self.step_count}")
+                    print(f"[CAP SYNC] step={self.step_count}")
             self.sync_parameters()
             did_sync = True
 
@@ -125,7 +125,6 @@ class DMC(torch.optim.Optimizer):
             if loss is not None:
                 avg_loss = self.reduce_scalar(loss)
                 self.adapt_tau(avg_loss)
-                self.logger.log(f"Trying to adapt tau: new tau = {self.tau}", rank0_only=True)
         
         if self.tests and did_sync:
             Tests(self.all_params, self.logger).param_consistency()  

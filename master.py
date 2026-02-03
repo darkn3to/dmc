@@ -208,13 +208,17 @@ def main():
 
         ip = utils.find_own_ip()
         os.makedirs(RESOURCES_DIR, exist_ok=True)
-        with open(NODES_FILENAME, "w") as f:
-            f.write(f"[{os.getlogin()}]: {ip}\n")
-            
-            # --- UPDATED ---
-            # Iterate over the dict's items (ip, username)
+        with open(NODES_FILENAME, "w") as f_nodes, open("inventory.ini", "w") as f_inventory:
+            # Write master section
+            f_nodes.write(f"[{os.getlogin()}]: {ip}\n")
+            f_inventory.write("[master]\n")
+            f_inventory.write(f"{os.getlogin()} ansible_host={ip}\n\n")
+
+            # Write workers section
+            f_inventory.write("[workers]\n")
             for worker_ip, username in workers.items():
-                f.write(f"[{username}]: {worker_ip}\n")
+                f_nodes.write(f"[{username}]: {worker_ip}\n")
+                f_inventory.write(f"{username} ansible_host={worker_ip}\n")
         
         if workers:
             send_file_to_workers(sock, NODES_FILENAME, workers)

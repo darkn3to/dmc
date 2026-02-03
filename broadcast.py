@@ -4,6 +4,7 @@ from mpi4py import MPI
 
 communicator = MPI.COMM_WORLD
 rank = communicator.Get_rank()
+size = communicator.Get_size()
 
 FILES = None
 
@@ -66,5 +67,7 @@ if __name__ == "__main__":
 
     if rank == 0:
         print(f"[Master] Broadcasting all files in directory: {broadcast_dir}")
+
+    print(f"DMCOptimizer initialized on rank {rank} out of {size} processes.")
 
     broadcast_directory(broadcast_dir)
