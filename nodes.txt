@@ -1,3 +1,0 @@
-[maverick]: 192.168.1.7
-[maverick]: 192.168.1.7
-[manas12singh]: 192.168.1.8
