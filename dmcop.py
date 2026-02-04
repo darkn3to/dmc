@@ -13,7 +13,7 @@ class DMC(torch.optim.Optimizer):
     3. Reduces scalar values (e.g., loss) across all processes using an average reduction operation.
     4. Provides optional debugging logs and parameter consistency tests to ensure correctness during distributed training.
     """
-    def __init__(self, model, optimizer, backend, tau, debug=False, tests=False):
+    def __init__(self, model, optimizer, backend, tau, debug=False, tests=False, intercept_print=False):
         self.model = model
         self.inner_optimizer = optimizer
         self.tests = tests
@@ -41,7 +41,7 @@ class DMC(torch.optim.Optimizer):
         self.rank = torch.distributed.get_rank()
         self.world_size = torch.distributed.get_world_size()
 
-        self.logger = Logger(self.rank)
+        self.logger = Logger(self.rank, intercept_print=intercept_print)
 
         # tau parameters control the communication freq.
         # Inital tau is user-defined.
