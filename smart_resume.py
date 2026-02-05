@@ -5,7 +5,7 @@ import os
 import time
 from torch.utils.data import DataLoader, Sampler
 
-# 1. The Smart Sampler (Handles Zero-Cost Skipping)
+# 1. The Smart Sampler
 class ResumeSampler(Sampler):
     """
     Generates a random shuffle but skips the first 'start_idx' samples.
