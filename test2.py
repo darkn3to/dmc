@@ -6,11 +6,15 @@ from torch.amp.autocast_mode import autocast
 from torch.amp.grad_scaler import GradScaler
 import time
 from smart_resume import SmartManager
+import os
+from dotenv import load_dotenv
 
 # CONFIG
 BATCH_SIZE = 64
 EPOCHS = 10
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+load_dotenv()
+DATA_ROOT = os.getenv("DATA_ROOT", "./data")
 
 # 1. SETUP DATA
 train_transforms = transforms.Compose([
@@ -22,8 +26,8 @@ val_transforms = transforms.Compose([
     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 ])
 
-train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=train_transforms)
-val_dataset = datasets.CIFAR10(root='./data', train=False, download=True, transform=val_transforms)
+train_dataset = datasets.CIFAR10(root=DATA_ROOT, train=True, download=False, transform=train_transforms)
+val_dataset = datasets.CIFAR10(root=DATA_ROOT, train=False, download=False, transform=val_transforms)
 
 # 2. SETUP MODEL
 model = models.mobilenet_v3_small(weights='IMAGENET1K_V1')
@@ -50,7 +54,7 @@ for epoch in range(manager.start_epoch, EPOCHS):
     
     # ASK MANAGER FOR THE LOADER (Handles skipping automatically)
     train_loader = manager.get_loader(train_dataset, BATCH_SIZE, epoch)
-    print(f"Epoch {epoch+1} starting...")
+    print(f"Epoch {epoch} starting...")
     
     for i, (images, labels) in enumerate(train_loader):
         images, labels = images.to(DEVICE), labels.to(DEVICE)

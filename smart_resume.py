@@ -33,6 +33,10 @@ class SmartManager:
         self.seed = seed
         self.stop_requested = False
         
+        self.autosave_interval = 30  
+        
+        self.last_save_time = time.time()
+        
         # State Variables
         self.start_epoch = 0
         self.start_sample_idx = 0
@@ -73,6 +77,7 @@ class SmartManager:
             if batch_idx != -1:
                 self.start_sample_idx = (batch_idx + 1) * batch_size
                 
+            self.last_save_time = time.time()
             print(f"Resuming Epoch {self.start_epoch}, skipped {self.start_sample_idx} samples.")
             return True
         else:
@@ -86,6 +91,7 @@ class SmartManager:
             self.start_sample_idx = 0
             self.elapsed_time = 0.0
             self.stats = {"correct": 0, "total": 0, "running_loss": 0.0}
+            self.last_save_time = time.time()
 
         sampler = ResumeSampler(dataset, start_sample_idx=self.start_sample_idx, seed=self.seed + epoch)
         
@@ -94,12 +100,11 @@ class SmartManager:
     def check_and_save(self, epoch, batch_idx, model, optimizer, current_session_time, batch_size):
         """Checks if stop signal was received. If yes, saves and exits."""
         
+        global_batch_idx = (self.start_sample_idx // batch_size) + batch_idx
+        total_time = self.elapsed_time + current_session_time
+        
         if self.stop_requested:
             print(f"\nDone: Epoch {epoch}, Batch {batch_idx}.")
-            
-            # Calculate REAL batch index (global)
-            global_batch_idx = (self.start_sample_idx // batch_size) + batch_idx
-            total_time = self.elapsed_time + current_session_time
             
             torch.save({
                 'epoch': epoch,
@@ -113,6 +118,22 @@ class SmartManager:
             
             print(f"Checkpoint saved. Total time so far: {total_time:.1f}s")
             sys.exit(0)
+        
+        now = time.time()
+        if now - self.last_save_time >= self.autosave_interval:
+            torch.save({
+                'epoch': epoch,
+                'batch_idx': global_batch_idx,
+                'batch_size': batch_size,
+                'elapsed_time': total_time,
+                'stats': self.stats,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+            }, self.path)
+            # update persisted elapsed_time and autosave timer
+            self.elapsed_time = total_time
+            self.last_save_time = now
+            print(f"Autosaved checkpoint at Epoch {epoch}, Batch {batch_idx}. Total time: {total_time:.1f}s")
 
     def update_stats(self, loss_val, preds, labels):
         """Accumulates accuracy/loss stats."""
