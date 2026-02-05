@@ -16,7 +16,6 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 load_dotenv()
 DATA_ROOT = os.getenv("DATA_ROOT", "./data")
 
-# 1. SETUP DATA
 train_transforms = transforms.Compose([
     transforms.Resize(224), transforms.RandomHorizontalFlip(),
     transforms.ToTensor(), transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
@@ -29,7 +28,6 @@ val_transforms = transforms.Compose([
 train_dataset = datasets.CIFAR10(root=DATA_ROOT, train=True, download=False, transform=train_transforms)
 val_dataset = datasets.CIFAR10(root=DATA_ROOT, train=False, download=False, transform=val_transforms)
 
-# 2. SETUP MODEL
 model = models.mobilenet_v3_small(weights='IMAGENET1K_V1')
 model.classifier[3] = nn.Linear(model.classifier[3].in_features, 10)
 model = model.to(DEVICE)
@@ -37,17 +35,11 @@ optimizer = optim.Adam(model.parameters(), lr=1e-4)
 criterion = nn.CrossEntropyLoss()
 scaler = GradScaler()
 
-# ---------------------------------------------------------
-# 3. INITIALIZE SMART MANAGER
-# ---------------------------------------------------------
 manager = SmartManager(checkpoint_path="checkpoint.pth", device=DEVICE)
 manager.load_checkpoint(model, optimizer)
 
 print(f"Training on {DEVICE}...")
 
-# ---------------------------------------------------------
-# 4. TRAINING LOOP
-# ---------------------------------------------------------
 for epoch in range(manager.start_epoch, EPOCHS):
     model.train()
     session_start = time.time()
