@@ -5,7 +5,7 @@ from torchvision import datasets, transforms, models
 from torch.amp.autocast_mode import autocast
 from torch.amp.grad_scaler import GradScaler
 import time
-from smart_resume import SmartManager  # <--- IMPORT YOUR LIBRARY
+from smart_resume import SmartManager
 
 # CONFIG
 BATCH_SIZE = 64
