@@ -53,7 +53,7 @@ class DMC(torch.optim.Optimizer):
         self.tau_max = 100
 
         # Hard cap on max local steps to avoid local divergence.
-        self.max_local_steps = 500
+        self.max_local_steps = 30
 
     def _log(self, *args, rank0_only=False) -> None:
         message = " ".join(map(str, args))

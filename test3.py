@@ -25,8 +25,8 @@ val_transforms = transforms.Compose([
     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 ])
 
-train_dataset = datasets.CIFAR10(root=DATA_ROOT, train=True, download=False, transform=train_transforms)
-val_dataset = datasets.CIFAR10(root=DATA_ROOT, train=False, download=False, transform=val_transforms)
+train_dataset = datasets.CIFAR10(root='./data', train=True, download=False, transform=train_transforms)
+val_dataset = datasets.CIFAR10(root='./data', train=False, download=False, transform=val_transforms)
 
 model = models.mobilenet_v3_small(weights='IMAGENET1K_V1')
 model.classifier[3] = nn.Linear(model.classifier[3].in_features, 10)

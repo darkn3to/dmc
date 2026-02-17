@@ -6,11 +6,11 @@ SAVE IN HOME DIRECTORY
 sudo apt install -y sshfs
 mkdir -p ~/remote_data
 sudo chown $(id -u):$(id -g) ~/remote_data
-sshfs manas12singh@192.168.1.8:/home/manas12singh/dmc/data ~/remote_data
+sshfs manas12singh@192.168.1.8:/home/manas12singh/data ~/remote_data
 fusermount3 -u ~/remote_data
 
 
 allow ping
-sudo ufw allow proto ipv6-icmp from any
+sudo ufw allow proto ipv4-icmp from any
 allow ssh
 sudo ufw allow 22/tcp
