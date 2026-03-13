@@ -6,7 +6,7 @@ from dmc_sharding import (
 
 
 def main():
-    root_path = "cifar_sharding_dataset/train"
+    root_path = "cifar_raw/cifar-10-batches-py"
 
     print("\n[TEST] Checking dataset path...")
     print("Current working directory:", os.getcwd())
@@ -41,7 +41,7 @@ def main():
 
     shard_groups_to_archives(
         groups=groups,
-        output_dir="cifarshards_output",
+        output_dir="cifar_shards_output",
         num_shards=5,          # You can change this
         compression="zstd"
     )

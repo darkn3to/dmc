@@ -1,5 +1,4 @@
 import os
-import pandas as pd
 from collections import defaultdict
 from typing import Dict, List
 from .compressor import get_compressor
@@ -14,6 +13,7 @@ def shard_dataset(
     num_shards: int,
     compression: str = "zstd"
 ):
+    import pandas as pd 
     """
     Splits a centralized dataset into balanced shards while keeping related
     data (based on group_key) intact. Outputs compressed shard files.

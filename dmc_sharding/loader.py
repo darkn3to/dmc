@@ -22,12 +22,14 @@ def load_folder_dataset(
     allowed_extensions: Set[str] = None
 ) -> List[Dict]:
     """
-    root_dir/
-      users/
-      orders/
-      transactions/
+    Generic dataset loader.
 
-    Each immediate subfolder = one logical group
+    Works for:
+    - folders
+    - files
+    - mixed datasets
+
+    Each file or folder becomes a logical group.
     """
 
     if allowed_extensions:
@@ -35,35 +37,60 @@ def load_folder_dataset(
 
     groups = []
 
-    for group_name in os.listdir(root_dir):
-        group_dir = os.path.join(root_dir, group_name)
+    for entry in os.listdir(root_dir):
 
-        if not os.path.isdir(group_dir):
-            continue
+        entry_path = os.path.join(root_dir, entry)
 
         files = []
         total_size = 0
 
-        for root, _, filenames in os.walk(group_dir):
-            for fname in filenames:
-                ext = os.path.splitext(fname)[1].lower()
+        # -------------------------
+        # CASE 1: entry is a FILE
+        # -------------------------
+        if os.path.isfile(entry_path):
 
-                if allowed_extensions and ext not in allowed_extensions:
-                    continue
+            ext = os.path.splitext(entry)[1].lower()
 
-                path = os.path.join(root, fname)
-                files.append(path)
-                total_size += os.path.getsize(path)
+            if allowed_extensions and ext not in allowed_extensions:
+                continue
+
+            size = os.path.getsize(entry_path)
+
+            groups.append({
+                "group_id": entry,
+                "items": [entry_path],
+                "size": size
+            })
+
+            continue
+
+        # -------------------------
+        # CASE 2: entry is a FOLDER
+        # -------------------------
+        if os.path.isdir(entry_path):
+
+            for root, _, filenames in os.walk(entry_path):
+
+                for fname in filenames:
+
+                    ext = os.path.splitext(fname)[1].lower()
+
+                    if allowed_extensions and ext not in allowed_extensions:
+                        continue
+
+                    path = os.path.join(root, fname)
+
+                    files.append(path)
+                    total_size += os.path.getsize(path)
 
         if files:
             groups.append({
-                "group_id": group_name,
+                "group_id": entry,
                 "items": files,
                 "size": total_size
             })
 
     return groups
-
 
 def load_from_metadata(metadata_csv: str) -> List[Dict]:
     """

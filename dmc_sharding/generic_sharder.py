@@ -54,7 +54,7 @@ def shard_groups_to_archives(
 
                 for path in group["items"]:
                     # Preserve relative structure inside archive
-                    arcname = os.path.join(group_id, os.path.relpath(path))
+                    arcname = os.path.join(group_id, os.path.basename(path))
                     tar.add(path, arcname=arcname)
 
                     metadata_records.append({
