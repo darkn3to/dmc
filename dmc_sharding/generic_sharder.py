@@ -16,7 +16,6 @@ def greedy_bin_pack(groups: List[Dict], num_shards: int) -> Dict[int, List[Dict]
     shard_loads = [0] * num_shards
     shard_groups = defaultdict(list)
 
-    # Sort groups by size (largest first)
     groups_sorted = sorted(groups, key=lambda g: g["size"], reverse=True)
 
     for group in groups_sorted:
@@ -45,16 +44,27 @@ def shard_groups_to_archives(
 
     metadata_records = []
 
+    # 🔹 Find dataset root from all files
+    all_paths = []
+    for g in groups:
+        all_paths.extend(g["items"])
+
+    dataset_root = os.path.commonpath(all_paths)
+
     for shard_id, shard_groups in shard_map.items():
+
         tar_path = os.path.join(output_dir, f"shard_{shard_id}.tar")
 
         with tarfile.open(tar_path, "w") as tar:
+
             for group in shard_groups:
                 group_id = group["group_id"]
 
                 for path in group["items"]:
-                    # Preserve relative structure inside archive
-                    arcname = os.path.join(group_id, os.path.basename(path))
+
+                    # 🔹 Preserve folder structure relative to dataset root
+                    arcname = os.path.relpath(path, dataset_root)
+
                     tar.add(path, arcname=arcname)
 
                     metadata_records.append({
@@ -68,12 +78,10 @@ def shard_groups_to_archives(
         compressor.compress(tar_path, compressed_path)
         os.remove(tar_path)
 
-    # Write metadata for recovery / inspection
     write_metadata(
-    output_dir=output_dir,
-    compression=compression,
-    shard_map=shard_map
-)
-
+        output_dir=output_dir,
+        compression=compression,
+        shard_map=shard_map
+    )
 
     print("[DMC-Sharding] Generic sharding complete.")
