@@ -1,4 +1,5 @@
 import json
+import os
 import psutil
 import socket
 from math import ceil
@@ -33,6 +34,12 @@ def collect_resources(IP) -> dict:
         "storage": storage
     }
     return spec
+
+def ensure_dir(path: str):
+    os.makedirs(path, exist_ok=True)
+
+def estimate_file_size(path: str) -> int:
+    return os.path.getsize(path)
 
 '''
 def generate_mpirun_command(nodes, script_path="broadcast.py") -> str:

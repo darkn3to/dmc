@@ -4,7 +4,7 @@ from collections import defaultdict
 from typing import List, Dict
 import pandas as pd
 from .compressor import get_compressor
-from .utils import ensure_dir
+from utils import ensure_dir
 from .metadata import write_metadata
 import re
 import hashlib

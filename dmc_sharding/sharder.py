@@ -4,7 +4,7 @@ from typing import Dict, List
 import pandas as pd 
 from .compressor import get_compressor
 from .metadata import write_metadata
-from .utils import ensure_dir
+from utils import ensure_dir
 
 
 def shard_dataset(
