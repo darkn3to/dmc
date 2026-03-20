@@ -1,113 +1,50 @@
 import os
-import pandas as pd
-from typing import Set, List, Dict
+from typing import List, Dict
 
 
-def load_single_csv(csv_path: str, group_key: str) -> List[Dict]:
-    df = pd.read_csv(csv_path)
-    groups = []
-
-    for key, group in df.groupby(group_key):
-        groups.append({
-            "group_id": str(key),
-            "items": [csv_path],
-            "size": group.memory_usage(deep=True).sum()
-        })
-
-    return groups
-
-
-def load_folder_dataset(
-    root_dir: str,
-    allowed_extensions: Set[str] = None
-) -> List[Dict]:
+def load_dataset(root_dir: str, grouping: str = "file") -> List[Dict]:
     """
-    Generic dataset loader.
-
-    Works for:
-    - folders
-    - files
-    - mixed datasets
-
-    Each file or folder becomes a logical group.
+    grouping:
+        - "file"   → each file is a sample
+        - "folder" → each folder is a group
     """
-
-    if allowed_extensions:
-        allowed_extensions = {ext.lower() for ext in allowed_extensions}
 
     groups = []
 
-    for entry in os.listdir(root_dir):
+    if grouping == "file":
+        # 🔥 File-level grouping (current behavior)
+        for root, _, files in os.walk(root_dir):
+            for file in files:
+                path = os.path.join(root, file)
 
-        entry_path = os.path.join(root_dir, entry)
+                groups.append({
+                    "group_id": path,
+                    "items": [path],
+                    "size": os.path.getsize(path)
+                })
 
-        files = []
-        total_size = 0
+    elif grouping == "folder":
+        # 🔥 Folder-level grouping
+        for root, _, files in os.walk(root_dir):
 
-        # -------------------------
-        # CASE 1: entry is a FILE
-        # -------------------------
-        if os.path.isfile(entry_path):
-
-            ext = os.path.splitext(entry)[1].lower()
-
-            if allowed_extensions and ext not in allowed_extensions:
+            if not files:
                 continue
 
-            size = os.path.getsize(entry_path)
+            items = []
+            total_size = 0
+
+            for file in files:
+                path = os.path.join(root, file)
+                items.append(path)
+                total_size += os.path.getsize(path)
 
             groups.append({
-                "group_id": entry,
-                "items": [entry_path],
-                "size": size
-            })
-
-            continue
-
-        # -------------------------
-        # CASE 2: entry is a FOLDER
-        # -------------------------
-        if os.path.isdir(entry_path):
-
-            for root, _, filenames in os.walk(entry_path):
-
-                for fname in filenames:
-
-                    ext = os.path.splitext(fname)[1].lower()
-
-                    if allowed_extensions and ext not in allowed_extensions:
-                        continue
-
-                    path = os.path.join(root, fname)
-
-                    files.append(path)
-                    total_size += os.path.getsize(path)
-
-        if files:
-            groups.append({
-                "group_id": entry,
-                "items": files,
+                "group_id": root,   # folder becomes group
+                "items": items,
                 "size": total_size
             })
 
+    else:
+        raise ValueError("grouping must be 'file' or 'folder'")
+
     return groups
-
-def load_from_metadata(metadata_csv: str) -> List[Dict]:
-    """
-    Reload groups from metadata CSV (used in recovery / resume)
-    """
-    df = pd.read_csv(metadata_csv)
-    grouped = {}
-
-    for _, row in df.iterrows():
-        gid = row["group_id"]
-        path = row["path"]
-
-        grouped.setdefault(gid, {"items": [], "size": 0})
-        grouped[gid]["items"].append(path)
-        grouped[gid]["size"] += os.path.getsize(path)
-
-    return [
-        {"group_id": gid, **data}
-        for gid, data in grouped.items()
-    ]

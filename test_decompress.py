@@ -2,8 +2,8 @@ import os
 import tarfile
 from dmc_sharding.compressor import get_compressor
 
-SHARD_DIR = "cifar_shards_output"
-OUTPUT_DIR = "worker_test_output"
+SHARD_DIR = "dataset3_output"
+OUTPUT_DIR = "worker_test3_output"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

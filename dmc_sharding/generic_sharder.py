@@ -1,6 +1,5 @@
 import os
 import tarfile
-from collections import defaultdict
 from typing import List, Dict
 
 from .compressor import get_compressor
@@ -8,80 +7,110 @@ from .utils import ensure_dir
 from .metadata import write_metadata
 
 
-def greedy_bin_pack(groups: List[Dict], num_shards: int) -> Dict[int, List[Dict]]:
+def pack_samples_by_size(groups, max_shard_size):
     """
-    Distribute logical groups into shards using greedy bin packing
-    to balance shard sizes.
+    Greedy size-based packing with shuffle + edge case handling
     """
-    shard_loads = [0] * num_shards
-    shard_groups = defaultdict(list)
 
-    groups_sorted = sorted(groups, key=lambda g: g["size"], reverse=True)
+    import random
 
-    for group in groups_sorted:
-        idx = shard_loads.index(min(shard_loads))
-        shard_groups[idx].append(group)
-        shard_loads[idx] += group["size"]
+    # Shuffle (randomize real/fake distribution)
+    random.shuffle(groups)
 
-    return shard_groups
 
+    shards = []
+    current_shard = []
+    current_size = 0
+
+    for group in groups:
+        size = group["size"]
+
+        # Case 1: Oversized sample
+        if size > max_shard_size:
+            shards.append([group])
+            continue
+
+        # Case 2: Start new shard if limit exceeded
+        if current_size + size > max_shard_size:
+            if current_shard:  # avoid empty shard
+                shards.append(current_shard)
+            current_shard = []
+            current_size = 0
+
+        current_shard.append(group)
+        current_size += size
+
+    if current_shard:
+        shards.append(current_shard)
+
+    return shards
 
 def shard_groups_to_archives(
     groups: List[Dict],
     output_dir: str,
-    num_shards: int,
+    max_shard_size: int,
     compression: str = "zstd"
 ):
     """
-    Create compressed shard archives from logical groups.
-    Works for ANY data type: CSV, images, videos, mixed folders.
+    Final production sharding:
+    - Sample-level packing
+    - Size-based shards
+    - Preserves folder structure
+    - No duplication
     """
 
     ensure_dir(output_dir)
 
-    shard_map = greedy_bin_pack(groups, num_shards)
+    shards = pack_samples_by_size(groups, max_shard_size)
     compressor = get_compressor(compression)
 
-    metadata_records = []
-
-    # 🔹 Find dataset root from all files
+    # Find dataset root safely
     all_paths = []
     for g in groups:
         all_paths.extend(g["items"])
 
     dataset_root = os.path.commonpath(all_paths)
 
-    for shard_id, shard_groups in shard_map.items():
+    metadata_records = []
+
+    for shard_id, shard in enumerate(shards):
 
         tar_path = os.path.join(output_dir, f"shard_{shard_id}.tar")
 
         with tarfile.open(tar_path, "w") as tar:
 
-            for group in shard_groups:
-                group_id = group["group_id"]
+            shard_size = 0
 
-                for path in group["items"]:
+            for sample in shard:
+                sample_id = sample["group_id"]
 
-                    # 🔹 Preserve folder structure relative to dataset root
+                for path in sample["items"]:
+
+                    # Preserve full structure
                     arcname = os.path.relpath(path, dataset_root)
+                    arcname = arcname.replace("\\", "/")
 
                     tar.add(path, arcname=arcname)
 
+                    size = os.path.getsize(path)
+                    shard_size += size
+
                     metadata_records.append({
                         "shard_id": shard_id,
-                        "group_id": group_id,
-                        "path": path
+                        "sample_id": sample_id,
+                        "path": path,
+                        "size": size,
+                        "arcname": arcname
                     })
 
-        # Compress archive
+        # Compress
         compressed_path = tar_path + f".{compression}"
         compressor.compress(tar_path, compressed_path)
         os.remove(tar_path)
 
-    write_metadata(
-        output_dir=output_dir,
-        compression=compression,
-        shard_map=shard_map
-    )
+        print(f"[Shard {shard_id}] Created (~{shard_size} bytes)")
 
-    print("[DMC-Sharding] Generic sharding complete.")
+    # Write metadata
+    write_metadata(output_dir, metadata_records)
+
+    print("[DMC-Sharding] Completed successfully.")

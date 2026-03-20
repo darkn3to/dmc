@@ -1,6 +1,6 @@
 import os
 
-output_folder = "cifar_shards_output"   # change if your folder name is different
+output_folder = "dataset3_folder_output"   # change if your folder name is different
 
 print("Checking shard sizes...\n")
 

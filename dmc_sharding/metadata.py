@@ -1,30 +1,20 @@
 import os
 import csv
-from typing import Dict, List
 
 
-def write_metadata(
-    output_dir: str,
-    compression: str,
-    shard_map: Dict[int, List[dict]]
-):
+def write_metadata(output_dir: str, records: list):
     """
-    Writes metadata for generic sharding.
-    Records which group & files went into which shard.
+    Write metadata for shards.
     """
 
-    meta_path = os.path.join(output_dir, "metadata.csv")
+    path = os.path.join(output_dir, "metadata.csv")
 
-    with open(meta_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["shard_id", "group_id", "path", "compression"])
+    with open(path, "w", newline="") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=["shard_id", "sample_id", "path", "size", "arcname"]
+        )
+        writer.writeheader()
+        writer.writerows(records)
 
-        for shard_id, groups in shard_map.items():
-            for group in groups:
-                for path in group["items"]:
-                    writer.writerow([
-                        shard_id,
-                        group["group_id"],
-                        path,
-                        compression
-                    ])
+    print(f"[Metadata] Written to {path}")
