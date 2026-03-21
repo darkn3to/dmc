@@ -1,26 +1,26 @@
 import os
 from dmc_sharding import (
-    load_folder_dataset,
+    load_dataset,
     shard_groups_to_archives
 )
 
-
 def main():
-    root_path = "data/cifar-10-batches-py"
+    root_path = "data/test"
 
     print("\n[TEST] Checking dataset path...")
     print("Current working directory:", os.getcwd())
     print("Dataset exists?", os.path.exists(root_path))
 
     if not os.path.exists(root_path):
-        print("ERROR: CIFAR dataset not found.")
+        print("ERROR: Dataset not found.")
         return
 
-    print("\n[TEST] Loading CIFAR folder dataset...")
+    print("\n[TEST] Loading dataset...")
 
-    groups = load_folder_dataset(
+    groups = load_dataset(
         root_dir=root_path,
-        allowed_extensions=None
+        grouping="file",
+        depth=1
     )
 
     print(f"\n[TEST] Found {len(groups)} logical groups")
@@ -37,16 +37,21 @@ def main():
 
     print(f"\n[TEST] Total dataset size: {total_size} bytes")
 
-    print("\n[TEST] Starting sharding process...")
+    if len(groups) == 0:
+        print("No groups created. Sharding stopped.")
+        return
 
+    print("\n[TEST] Starting sharding process...")
+    print("Total samples:", len(groups))
+    
     shard_groups_to_archives(
-        groups=groups,
-        output_dir="cifar_shards_output",
-        num_shards=4,          # You can change this
-        compression="zstd"
+    groups=groups,
+    output_dir="data/shards_output",
+    max_shard_size=256 * 1024 * 1024,  
+    compression="zstd"
     )
 
-    print("\n[TEST] CIFAR sharding completed successfully!")
+    print("\n[TEST] Sharding completed successfully!")
 
 
 if __name__ == "__main__":
