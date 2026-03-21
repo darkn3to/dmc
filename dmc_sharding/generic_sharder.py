@@ -58,6 +58,9 @@ def shard_groups_to_archives(
     - Preserves folder structure
     - No duplication
     """
+    if not groups:
+        print("No groups to shard. Exiting.")
+        return
 
     ensure_dir(output_dir)
 
@@ -68,6 +71,10 @@ def shard_groups_to_archives(
     all_paths = []
     for g in groups:
         all_paths.extend(g["items"])
+
+    if not all_paths:
+        print("No files found in groups.")
+        return
 
     dataset_root = os.path.commonpath(all_paths)
 

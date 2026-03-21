@@ -20,7 +20,8 @@ def main():
 
     groups = load_dataset(
     root_dir=root_path,
-    grouping="folder"   # 🔁 change to "folder" when needed
+    grouping="file"
+    
 )
 
     print(f"\n[TEST] Found {len(groups)} logical groups")
@@ -37,13 +38,18 @@ def main():
 
     print(f"\n[TEST] Total dataset size: {total_size} bytes")
 
+    if len(groups) == 0:
+        print("No groups created. Sharding stopped.")
+        return
+
     print("\n[TEST] Starting sharding process...")
 
     print("Total samples:", len(groups))
     
+
     shard_groups_to_archives(
     groups=groups,
-    output_dir="dataset3_folder_output",
+    output_dir="dataset3_output",
     max_shard_size=256 * 1024 * 1024,  # 256 MB
     compression="zstd"
 )

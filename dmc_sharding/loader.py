@@ -2,17 +2,11 @@ import os
 from typing import List, Dict
 
 
-def load_dataset(root_dir: str, grouping: str = "file") -> List[Dict]:
-    """
-    grouping:
-        - "file"   → each file is a sample
-        - "folder" → each folder is a group
-    """
-
+def load_dataset(root_dir: str, grouping: str = "file", depth: int = 1) -> List[Dict]:
     groups = []
 
     if grouping == "file":
-        # 🔥 File-level grouping (current behavior)
+        # File-level grouping
         for root, _, files in os.walk(root_dir):
             for file in files:
                 path = os.path.join(root, file)
@@ -24,25 +18,50 @@ def load_dataset(root_dir: str, grouping: str = "file") -> List[Dict]:
                 })
 
     elif grouping == "folder":
-        # 🔥 Folder-level grouping
+        group_map = {}
+        max_available_depth = 0
+
+        # First pass → find max depth
         for root, _, files in os.walk(root_dir):
-
-            if not files:
-                continue
-
-            items = []
-            total_size = 0
-
             for file in files:
                 path = os.path.join(root, file)
-                items.append(path)
-                total_size += os.path.getsize(path)
+                rel_path = os.path.relpath(path, root_dir)
+                parts = rel_path.split(os.sep)
 
-            groups.append({
-                "group_id": root,   # folder becomes group
-                "items": items,
-                "size": total_size
-            })
+                folder_depth = len(parts) - 1
+                if folder_depth > max_available_depth:
+                    max_available_depth = folder_depth
+
+        # Depth check
+        if depth > max_available_depth:
+            print("Cannot do folder grouping: no more folders available.")
+            print(f"Maximum folder depth in dataset is {max_available_depth}")
+            return []
+
+        # Second pass → grouping
+        for root, _, files in os.walk(root_dir):
+            for file in files:
+                path = os.path.join(root, file)
+
+                rel_path = os.path.relpath(path, root_dir)
+                parts = rel_path.split(os.sep)
+
+                if len(parts) > depth:
+                    group_id = os.path.join(*parts[:depth])
+                else:
+                    group_id = parts[0]
+
+                if group_id not in group_map:
+                    group_map[group_id] = {
+                        "group_id": group_id,
+                        "items": [],
+                        "size": 0
+                    }
+
+                group_map[group_id]["items"].append(path)
+                group_map[group_id]["size"] += os.path.getsize(path)
+
+        groups = list(group_map.values())
 
     else:
         raise ValueError("grouping must be 'file' or 'folder'")
