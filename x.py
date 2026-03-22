@@ -1,214 +1,128 @@
+#!/usr/bin/env python3
+"""
+Diagnostic script to test UDP broadcast discovery between master and worker.
+Run on each machine separately to isolate the problem.
+"""
+
 import socket
-import time
-import json
-import utils
-import os
 import subprocess
+import sys
+import os
+import time
 import ipaddress
 
-# --- Constants ---
 PORT = 50000
 BROADCAST_ADDR = "255.255.255.255"
-NODES_FILENAME = "nodes.txt"
-MAX_RETRIES = 15
-ACK_TIMEOUT = 3.0 # seconds
-RESOURCES_DIR = "broadcast"
 
-# --- Protocol Messages ---
-HELLO_MSG = b"HELLO"
-ACK_MSG = b"ACK"
-FILE_START_MSG = b"FILE_START"
-EOF_MSG = b"EOF"
-RESOURCE_FILE_ACK_MSG = b"RESOURCE_FILE_ACK"
-# ADDED: New message to signal the end of broadcasts
-BROADCAST_COMPLETE_MSG = b"BROADCAST_COMPLETE" 
-
-def discover_master(sock: socket.socket) -> tuple | None:
-    """Broadcasts to find the master and returns its address if found."""
-    print("Searching for the master...")
-    username = subprocess.run(["whoami"], capture_output=True, text=True).stdout.strip().encode()
-    discovery_targets = get_discovery_targets()
-
-    while True:
-        for target in discovery_targets:
-            sock.sendto(username, (target, PORT))
-        print(f"Sent discovery probe to: {', '.join(discovery_targets)}. Waiting for ACK...")
+def test_outbound(targets):
+    """Test if we can send UDP packets."""
+    print("\n=== OUTBOUND TEST ===")
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    
+    message = b"TEST"
+    for target in targets:
         try:
-            data, addr = sock.recvfrom(1024)
-            if data == ACK_MSG:
-                print(f"Got ACK from master at {addr}")
-                return addr
-        except socket.timeout:
-            print("No ACK from master, retrying...")
-        time.sleep(2)
+            sock.sendto(message, (target, PORT))
+            print(f"✓ Successfully sent to {target}:{PORT}")
+        except Exception as e:
+            print(f"✗ Failed to send to {target}:{PORT}: {e}")
+    sock.close()
 
-
-def get_discovery_targets() -> list[str]:
-    """Builds a prioritized list of discovery addresses."""
-    targets = []
-    seen = set()
-
-    def add_target(value: str) -> None:
-        try:
-            ip = str(ipaddress.ip_address(value.strip()))
-        except ValueError:
-            return
-        if ip not in seen:
-            seen.add(ip)
-            targets.append(ip)
-
-    # Optional explicit master IP for cross-subnet discovery.
-    add_target(os.getenv("MASTER_IP", ""))
-
-    # Try directed broadcast for common /24 networks.
+def test_inbound():
+    """Test if we can listen for UDP packets."""
+    print("\n=== INBOUND TEST ===")
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    
     try:
-        own_ip = utils.find_own_ip()
-        parts = own_ip.split(".")
-        if len(parts) == 4:
-            add_target(f"{parts[0]}.{parts[1]}.{parts[2]}.255")
-    except OSError:
-        pass
-
-    add_target(BROADCAST_ADDR)
-    return targets
-
-def receive_file(sock: socket.socket, expected_addr: tuple, filename: str) -> None:
-    """Receives a file from a specific address."""
-    print(f"Waiting for file '{filename}' from master...")
-    with open(filename, "wb") as f:
-        while True:
-            data, addr = sock.recvfrom(1024)
-            if addr == expected_addr and data == FILE_START_MSG:
-                print(f"Receiving '{filename}'...")
-                break
-        while True:
-            data, addr = sock.recvfrom(1024)
-            if addr == expected_addr:
-                if data == EOF_MSG:
-                    print(f"'{filename}' transfer complete.")
-                    break
-                f.write(data)
-
-def receive_broadcast_files(sock: socket.socket, master_addr: tuple) -> None:
-    """Receives broadcasted files from the master."""
-    os.makedirs(RESOURCES_DIR, exist_ok=True)
-    print(f"[Worker] Listening for broadcasted files from master {master_addr[0]}...")
-
-    while True:
+        sock.bind(("0.0.0.0", PORT))
+        print(f"✓ Successfully bound to 0.0.0.0:{PORT}")
+        print(f"Listening for 5 seconds... (send from another machine: python3 test_discovery.py <your_ip>)")
+        
+        sock.settimeout(5.0)
         try:
-            # Wait for the file name OR the complete signal
-            file_name_data, addr = sock.recvfrom(1024)
-            if addr != master_addr:
-                continue
-
-            # --- THIS IS THE CRITICAL FIX ---
-            # Check if the master signaled that broadcasting is done
-            if file_name_data == BROADCAST_COMPLETE_MSG:
-                print("[Worker] Received broadcast complete signal. Moving on.")
-                break # Exit the while True loop
-            # --- END FIX ---
-
-            # If not complete, assume it's a file name
-            file_name = file_name_data.decode()
-            print(f"[Worker] Receiving file '{file_name}' from {addr[0]}...")
-
-            # Wait for FILE_START message
-            data, addr = sock.recvfrom(1024)
-            if addr != master_addr or data != FILE_START_MSG:
-                print("[Worker] Expected FILE_START, got something else. Skipping.")
-                continue
-
-            # Receive file chunks
-            file_data = bytearray()
             while True:
                 data, addr = sock.recvfrom(1024)
-                if addr == master_addr:
-                    if data == EOF_MSG:
-                        break
-                    file_data.extend(data)
-            
-            # Save the received file with the original file name
-            file_path = os.path.join(RESOURCES_DIR, file_name)
-            with open(file_path, "wb") as f:
-                f.write(file_data)
-            print(f"[Worker] Saved file as '{file_path}'")
-
-        except KeyboardInterrupt:
-            print("[Worker] Exiting...")
-            break
-        except Exception as e:
-            print(f"[Worker] Error: {e}")
-
-def send_file_with_retransmission(sock: socket.socket, recipient_addr: tuple, filename: str) -> None:
-    """Sends a file and waits for a confirmation ACK, with retransmissions."""
-    print(f"Sending file '{filename}' to master with confirmation...")
-
-    # Ensure buffer size is reasonable, e.g., 1024
-    buffer_size = 1024 - 50 # Give some headroom
-
-    for i in range(MAX_RETRIES):
-        print(f"Attempt {i+1}/{MAX_RETRIES}: Sending file '{filename}'...")
-        sock.sendto(FILE_START_MSG, recipient_addr)
-        time.sleep(0.01) # Small delay
-        
-        with open(filename, "rb") as f:
-            while chunk := f.read(buffer_size):
-                sock.sendto(chunk, recipient_addr)
-                # --- TIMING FIX ---
-                # Add a tiny sleep to pace packets and not flood the receiver
-                time.sleep(0.001) 
-                
-        time.sleep(0.01) # Give receiver a moment before EOF
-        sock.sendto(EOF_MSG, recipient_addr)
-        
-        sock.settimeout(ACK_TIMEOUT)
-        try:
-            data, addr = sock.recvfrom(1024)
-            if addr == recipient_addr and data == RESOURCE_FILE_ACK_MSG:
-                print("Master confirmed receipt. Transfer successful.")
-                return
+                print(f"✓ Received '{data.decode(errors='ignore')}' from {addr[0]}:{addr[1]}")
         except socket.timeout:
-            print(f"No confirmation from master. Retrying...")
-    
-    print(f"Transfer failed after {MAX_RETRIES} attempts.")
+            print("(No packets received - this is expected if no one is sending)")
+    except OSError as e:
+        print(f"✗ Failed to bind to port {PORT}: {e}")
+        print(f"   Check if another process is already using port {PORT}")
+        print(f"   Try: lsof -i :{PORT}")
+    finally:
+        sock.close()
+
+def test_local_ip():
+    """Show detected local IP."""
+    print("\n=== LOCAL CONFIGURATION ===")
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+        print(f"✓ Local IP detected: {local_ip}")
+        
+        parts = local_ip.split(".")
+        if len(parts) == 4:
+            directed_bcast = f"{parts[0]}.{parts[1]}.{parts[2]}.255"
+            print(f"✓ Network directed broadcast: {directed_bcast}")
+        
+        return local_ip
+    except Exception as e:
+        print(f"✗ Could not detect local IP: {e}")
+        return None
 
 def main():
-    """Main execution function for the worker node."""
-    sock = utils.sock_init("", PORT, 'w')
-    try:
-        sock.settimeout(2.0)
-        master_addr = discover_master(sock)
-        if not master_addr:
-            print("Could not find master. Exiting.")
-            return
-
-        sock.settimeout(None) # IMPORTANT: Clear timeout for blocking receives
-
-        # Receive the nodes.txt file from the master
-        receive_file(sock, master_addr, NODES_FILENAME)
-
-        # Receive broadcasted files from the master
-        # This function will now correctly exit when done
-        #receive_broadcast_files(sock, master_addr)
-
-        # --- THIS CODE IS NOW REACHABLE ---
-        print("[Worker] Collecting local resources...")
-        
-        # Collect and send resource information to the master
-        ip = utils.find_own_ip()
-        resources = utils.collect_resources(ip)
-        resource_file = f"{ip}_resources.json"
-        with open(resource_file, "w") as f:
-            json.dump(resources, f, indent=4)
-        print(f"Local resources saved to '{resource_file}'")
-
-        send_file_with_retransmission(sock, master_addr, resource_file)
+    print("UDP Discovery Diagnostic Tool")
+    print("="*50)
     
-    except Exception as e:
-        print(f"An error occurred in main: {e}")
-    finally:
-        print("Worker shutting down.")
-        sock.close()
+    local_ip = test_local_ip()
+    
+    # Determine targets
+    targets = []
+    
+    # If argument provided, that's the master IP to test
+    if len(sys.argv) > 1:
+        master_ip = sys.argv[1]
+        try:
+            ipaddress.ip_address(master_ip)
+            targets.append(master_ip)
+            print(f"Using explicit master IP: {master_ip}")
+        except ValueError:
+            print(f"Invalid IP address: {master_ip}")
+            return
+    
+    # Add directed broadcast for local network
+    if local_ip:
+        parts = local_ip.split(".")
+        if len(parts) == 4:
+            targets.append(f"{parts[0]}.{parts[1]}.{parts[2]}.255")
+    
+    # Add global broadcast
+    targets.append(BROADCAST_ADDR)
+    
+    print("\n=== TEST PLAN ===")
+    print("1. Test outbound (can we send UDP?)")
+    print("2. Test inbound (can we listen on port 50000?)")
+    print("3. Results will help isolate firewall vs code issues")
+    
+    test_outbound(targets)
+    test_inbound()
+    
+    print("\n=== TROUBLESHOOTING TIPS ===")
+    print("If outbound FAILS:")
+    print("  → Check firewall allows UDP 50000 outbound")
+    print("  → Check hosts can ping each other")
+    print()
+    print("If inbound FAILS:")
+    print("  → Port 50000 already in use (check: lsof -i :50000)")
+    print("  → Permission issue (try with sudo)")
+    print()
+    print("If inbound works but master/worker don't connect:")
+    print("  → Run with explicit MASTER_IP=<ip> python3 worker.py")
+    print("  → Common: broadcast doesn't cross VLANs/subnets")
 
 if __name__ == "__main__":
     main()
