@@ -1,3 +1,5 @@
+# Runs at the master node to load the dataset, create logical groups, and shard them into archives.
+
 import os
 from dmc_sharding import (
     load_dataset,
@@ -45,10 +47,10 @@ def main():
     print("Total samples:", len(groups))
     
     shard_groups_to_archives(
-    groups=groups,
-    output_dir="data/shards_output",
-    max_shard_size=256 * 1024 * 1024,  
-    compression="zstd"
+        groups=groups,
+        output_dir="data/shards_output",
+        max_shard_size=256 * 1024 * 1024,  
+        compression="zstd"
     )
 
     print("\n[TEST] Sharding completed successfully!")

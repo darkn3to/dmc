@@ -3,10 +3,10 @@ import tarfile
 from collections import defaultdict
 from typing import List, Dict
 from .compressor import get_compressor
-from utils import ensure_dir
 from .metadata import write_metadata
 import pandas as pd
 import re
+import utils
 import hashlib
 
 def hrw_score(shard_id, node_id) -> int:
@@ -105,7 +105,7 @@ def shard_groups_to_archives(
         print("No groups to shard. Exiting.")
         return
 
-    ensure_dir(output_dir)
+    utils.ensure_dir(output_dir)
 
     shards = pack_samples_by_size(groups, max_shard_size)
     compressor = get_compressor(compression)
@@ -152,37 +152,22 @@ def shard_groups_to_archives(
 
         print(f"[Shard {shard_id}] Created (~{shard_size} bytes)")
 
-    # Write metadata
     write_metadata(output_dir, metadata_records)
     # Get the path to the parent directory
     parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # Construct the path to nodes.txt
     nodes_file_path = os.path.join(parent_dir, 'nodes.txt')
-    # Function to parse IPs from nodes.txt
-    def parse_ips(file_path):
-        ip_list = []
-        try:
-            with open(file_path, 'r') as file:
-                for line in file:
-                    match = re.match(r'\[(.*?)\]:\s*(\d+\.\d+\.\d+\.\d+)', line)
-                    if match:
-                        key, ip = match.groups()
-                        ip_list.append(ip)
-        except FileNotFoundError:
-            print(f"nodes.txt not found at {file_path}")
-        return ip_list
-
 
     '''-----------------------------------------------------------------------------------------------------'''
     # Parse the IPs
-    parsed_ips = parse_ips(nodes_file_path)
+    parsed_ips = utils.parse_ips(nodes_file_path)
     #print("Parsed IPs:", parsed_ips)
     df = pd.read_csv(os.path.join(output_dir, "metadata.csv"))
     unique_shards = df['shard_id'].unique().tolist()
     replication_factor = min(2, len(parsed_ips)) # Set replication factor to 2 or the number of nodes, whichever is smaller
     # compute original and replica shard placement
     placement_map = hrw_assign(unique_shards, parsed_ips, replication_factor)
-    print(placement_map)
+    #print(placement_map)
     '''-----------------------------------------------------------------------------------------------------'''
 
     '''

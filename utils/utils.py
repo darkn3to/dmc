@@ -3,6 +3,7 @@ import os
 import psutil
 import socket
 from math import ceil
+import re
 
 def sock_init(IP, PORT, MODE) -> socket.socket: 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -13,12 +14,9 @@ def sock_init(IP, PORT, MODE) -> socket.socket:
     sock.bind((IP, PORT))
     return sock
 
-#find IP address of the current machine
 def find_own_ip() -> int:
     s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        #a dummy connection to get Machine's local IP; it determines the 
-        # "FROM IP address" in a connection request
         s.connect(("8.8.8.8", 80))
         return s.getsockname()[0]
     finally:
@@ -40,6 +38,19 @@ def ensure_dir(path: str):
 
 def estimate_file_size(path: str) -> int:
     return os.path.getsize(path)
+
+def parse_ips(file_path):
+    ip_list = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                match = re.match(r'\[(.*?)\]:\s*(\d+\.\d+\.\d+\.\d+)', line)
+                if match:
+                    key, ip = match.groups()
+                    ip_list.append(ip)
+    except FileNotFoundError:
+        print(f"nodes.txt not found at {file_path}")
+    return ip_list
 
 '''
 def generate_mpirun_command(nodes, script_path="broadcast.py") -> str:
