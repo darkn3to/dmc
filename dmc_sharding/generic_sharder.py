@@ -8,6 +8,7 @@ import pandas as pd
 import re
 import utils
 import hashlib
+import json
 
 def hrw_score(shard_id, node_id) -> int:
     key = f"{shard_id}-{node_id}"
@@ -58,7 +59,6 @@ def pack_samples_by_size(groups, max_shard_size):
 
     # Shuffle (randomize real/fake distribution)
     random.shuffle(groups)
-
 
     shards = []
     current_shard = []
@@ -167,6 +167,14 @@ def shard_groups_to_archives(
     replication_factor = min(2, len(parsed_ips)) # Set replication factor to 2 or the number of nodes, whichever is smaller
     # compute original and replica shard placement
     placement_map = hrw_assign(unique_shards, parsed_ips, replication_factor)
+    broadcast_dir = os.path.join(parent_dir, "broadcast")
+    utils.ensure_dir(broadcast_dir)
+
+    placement_map_path = os.path.join(broadcast_dir, "placement_map.json")
+    with open(placement_map_path, "w", encoding="utf-8") as f:
+        json.dump(placement_map, f, indent=2)
+
+    print(f"[DMC-Sharding] Wrote placement map to {placement_map_path}")
     #print(placement_map)
     '''-----------------------------------------------------------------------------------------------------'''
 
