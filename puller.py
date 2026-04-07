@@ -1,33 +1,16 @@
-import json
+import argparse
 import os
 import requests
 import utils
 import tarfile
+import subprocess
 from dmc_sharding.compressor import get_compressor
 
 SHARD_ARCHIVE_DIR = "data/shards_archives"
-SHARD_EXTRACT_DIR = "data/shards"
 
-
-def load_placement_map(path="broadcast/placement_map.json"):
-    with open(path, "r") as f:
-        return json.load(f)
-
-
-def get_my_shards(placement_map, my_ip):
-    if my_ip not in placement_map:
-        raise ValueError(f"{my_ip} not found in placement map")
-
-    primary = placement_map[my_ip]["primary"]
-    replica = placement_map[my_ip]["replica"]
-
-    return primary + replica
-
-
-def download_shard(master_ip, shard_id, output_dir):
+def download_shard(master_ip, shard_id, output_dir, dmc_folder_path):
     os.makedirs(output_dir, exist_ok=True)
-
-    url = f"http://{master_ip}:8000/shards_output/shard_{shard_id}.tar.zstd"
+    url = f"http://{master_ip}:8000/{dmc_folder_path}/shards_output/shard_{shard_id}.tar.zstd"
     local_path = os.path.join(output_dir, f"shard_{shard_id}.tar.zstd")
     temp_path = local_path + ".tmp"
 
@@ -58,7 +41,6 @@ def download_shard(master_ip, shard_id, output_dir):
 
     print(f"[Error] Failed to download shard {shard_id}")
     return None
-
 
 def safe_extract(tar, path):
     for member in tar.getmembers():
@@ -95,34 +77,54 @@ def decompress_and_extract(shard_archive_path, extract_base_dir, compressor):
 
     print(f"[Worker] Shard {shard_id} extracted.")
 
-def pull_shards(master_ip, placement_file, archive_dir, extract_dir):
+def pull_shards(master_ip, archive_dir, extract_dir, dmc_folder_path):
     os.makedirs(archive_dir, exist_ok=True)
     os.makedirs(extract_dir, exist_ok=True)
 
-    placement_map = load_placement_map(placement_file)
+    placement_map = utils.load_placement_map()
     my_ip = utils.find_own_ip()
 
     print(f"[Worker] My IP: {my_ip}")
 
-    shards = get_my_shards(placement_map, my_ip)
+    shards = utils.get_my_shards(placement_map, my_ip, preprocess=True)
     print(f"[Worker] Need shards: {shards}")
 
     compressor = get_compressor("zstd")
 
     for shard_id in shards:
-        archive_path = download_shard(master_ip, shard_id, archive_dir)
+            if my_ip != master_ip:
+                archive_path = download_shard(master_ip, shard_id, archive_dir, dmc_folder_path)
 
-        if archive_path:
-            decompress_and_extract(archive_path, extract_dir, compressor)
+                if archive_path:
+                    decompress_and_extract(archive_path, extract_dir, compressor)
+            else:
+                shards_output_dir = os.path.join(dmc_folder_path, "shards_output")
+                shard_file = os.path.join(shards_output_dir, f"shard_{shard_id}.tar.zstd")
+                
+                if os.path.exists(shard_file):
+                    print(f"[Master] Processing local shard {shard_id} from {shard_file}")
+                    decompress_and_extract(shard_file, extract_dir, compressor)
+                else:
+                    print(f"[Master] Shard {shard_id} not found in {shards_output_dir}")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("dmc_folder_path", help="Path to the DMC folder")
+    args = parser.parse_args()
+
     ips = utils.parse_ips("nodes.txt")
     if not ips:
         raise ValueError("No IPs found in nodes.txt")
 
+    if ips[0] == utils.find_own_ip():
+        server=subprocess.Popen(["python3", "-m", "http.server", "8000"])
+
     pull_shards(
         master_ip=ips[0],
-        placement_file="placement_map.json",
         archive_dir="./local_archives",
-        extract_dir="./local_shards"
+        extract_dir="./local_shards",
+        dmc_folder_path=args.dmc_folder_path
     )
+
+    if ips[0] == utils.find_own_ip():
+        server.terminate()
