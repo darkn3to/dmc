@@ -52,6 +52,26 @@ def parse_ips(file_path):
         print(f"nodes.txt not found at {file_path}")
     return ip_list
 
+def load_placement_map(path="broadcast/placement_map.json"):
+    try:
+        with open(path, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: {path} not found.")
+        return {}
+    
+def get_my_shards(placement_map, my_ip, preprocess=False):
+    if my_ip not in placement_map:
+            raise ValueError(f"{my_ip} not found in placement map")
+    
+    if preprocess:
+        primary = placement_map[my_ip]["primary"]
+        replica = placement_map[my_ip]["replica"]
+
+        return primary + replica
+    else:
+        return placement_map[my_ip]["primary"]
+    
 '''
 def generate_mpirun_command(nodes, script_path="broadcast.py") -> str:
     base = "/usr/bin/mpirun"
