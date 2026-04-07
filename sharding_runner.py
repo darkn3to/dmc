@@ -1,13 +1,50 @@
 # Runs at the master node to load the dataset, create logical groups, and shard them into archives.
-
 import os
+import argparse
 from dmc_sharding import (
     load_dataset,
     shard_groups_to_archives
 )
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Load dataset, create logical groups, and shard into archives."
+    )
+    parser.add_argument(
+        "src",
+        help="Root dataset path (replaces root_path)."
+    )
+    parser.add_argument(
+        "--max-shard-size",
+        type=int,
+        default=4 * 1024 * 1024,
+        help="Maximum shard size in bytes (default: 4194304)."
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["file", "folder"],
+        default="file",
+        help='Sharding mode: "file" (file mode) or "folder" (default: file).'
+    )
+    parser.add_argument(
+        "--depth",
+        type=int,
+        default=1,
+        help='Folder depth (only used when --mode is "folder").'
+    )
+    return parser.parse_args()
+
+
 def main():
-    root_path = "data/test"
+    args = parse_args()
+
+    root_path = args.src  # src replaces previous hardcoded root_path
+    output_dir = "shards_output"  # dest stays hardcoded as requested
+
+    # Map CLI mode -> load_dataset grouping value
+    grouping = "file" if args.mode == "file" else "folder"
+    depth = args.depth if args.mode == "folder" else 1
 
     print("\n[TEST] Checking dataset path...")
     print("Current working directory:", os.getcwd())
@@ -17,12 +54,15 @@ def main():
         print("ERROR: Dataset not found.")
         return
 
+    if args.mode != "folder" and args.depth != 1:
+        print('[TEST] Note: --depth is ignored unless --mode is "folder".')
+
     print("\n[TEST] Loading dataset...")
 
     groups = load_dataset(
         root_dir=root_path,
-        grouping="file",
-        depth=1
+        grouping=grouping,
+        depth=depth
     )
 
     print(f"\n[TEST] Found {len(groups)} logical groups")
@@ -45,11 +85,11 @@ def main():
 
     print("\n[TEST] Starting sharding process...")
     print("Total samples:", len(groups))
-    
+
     shard_groups_to_archives(
         groups=groups,
-        output_dir="data/shards_output",
-        max_shard_size=256 * 1024 * 1024,  
+        output_dir=output_dir,
+        max_shard_size=args.max_shard_size,
         compression="zstd"
     )
 
