@@ -5,3 +5,5 @@ logs/
 *.out
 *.pth
 *.txt
+*.log
+*.json
