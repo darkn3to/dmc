@@ -6,9 +6,9 @@ import os
 import subprocess
 
 # --- Constants ---
-PORT = 50000
+PORT = 50001
 BROADCAST_ADDR = "255.255.255.255"
-NODES_FILENAME = "nodes.txt"
+NODES_FILENAME = "nodes1.txt"
 MAX_RETRIES = 15
 ACK_TIMEOUT = 3.0 # seconds
 RESOURCES_DIR = "broadcast"
