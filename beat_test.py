@@ -10,7 +10,7 @@ def worker_wrapper(master_ip, worker_id, interval, reliability):
     print(f"--- [START] {worker_id} is now online ---")
     
     # Create worker node and start sending heartbeats
-    worker = WorkerNode(master_ip, worker_id, interval)
+    worker = WorkerNode(master_ip, interval)
     
     try:
         while True:
@@ -30,7 +30,7 @@ def worker_process(master_ip, worker_id, interval, reliability, min_uptime):
     It will stay alive for at least min_uptime seconds before crash checks begin.
     """
     print(f"--- [START] {worker_id} is now online ---")
-    worker = WorkerNode(master_ip, worker_id, interval)
+    worker = WorkerNode(master_ip, interval)
     start_time = time.time()
     
     while True:
@@ -44,7 +44,7 @@ def worker_process(master_ip, worker_id, interval, reliability, min_uptime):
         try:
             import socket
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-                s.sendto(worker_id.encode("utf-8"), (master_ip, 9999))
+                s.sendto(b"heartbeat", (master_ip, 9999))
         except Exception:
             pass
         
@@ -52,7 +52,7 @@ def worker_process(master_ip, worker_id, interval, reliability, min_uptime):
 
 if __name__ == "__main__":
     # CONFIGURATION
-    known_workers = ["Node-A", "Node-B"]
+    known_workers = ["127.0.0.1"]
     # Master waits 15 seconds before declaring offline
     threshold = 10 
     min_runtime_after_restart = threshold + 5
@@ -65,11 +65,11 @@ if __name__ == "__main__":
 
     # Worker Personalities: (Reliability, Heartbeat Interval)
     # Node-B is set to 0.6 reliability to crash often.
-        # Rogue-Node is NOT in known_workers, so it will send unknown signals
+        # On localhost simulation all workers share 127.0.0.1, so identity is IP-based.
     worker_specs = {
             "Node-A": (0.99, 5),      
             "Node-B": (0.60, 5),      
-            "Rogue-Node": (0.95, 5)   # This worker is not registered with master
+            "Rogue-Node": (0.95, 5)
         }
 
     active_jobs = {}

@@ -1,20 +1,41 @@
-- name: Run DMC training
+- name: Start DMC runners
   hosts: all
   gather_facts: yes
   vars:
     project_dir: "{{ ansible_env.HOME }}/dmc"
 
   tasks:
-    - name: Launch distributed training
+    - name: Start runner (only if not already running)
       shell: |
-        PYTHONUNBUFFERED=1 \
-        python3 -u -m torch.distributed.run \
-          --nnodes={{ groups['all'] | length }} \
-          --nproc_per_node=1 \
-          --node_rank={{ groups['all'].index(inventory_hostname) }} \
-          --master_addr={{ hostvars[groups['master'][0]].ansible_host }} \
-          --master_port=29500 \
-          test2.py
+        pgrep -f runner.py || nohup python3 runner.py > runner.log 2>&1 &
+      args:
+        chdir: "{{ project_dir }}"
 
+- name: Wait for runners to be ready
+  hosts: localhost
+  tasks:
+    - pause:
+        seconds: 4
+
+- name: Send training config
+  hosts: all
+  gather_facts: no
+  vars:
+    project_dir: "{{ ansible_env.HOME }}/dmc"
+
+    config_json: >-
+      {{
+        {
+          "nnodes": groups['all'] | length,
+          "rank": groups['all'].index(inventory_hostname),
+          "master_addr": hostvars[groups['master'][0]].ansible_host,
+          "script": "test2.py"
+        } | to_json
+      }}
+
+  tasks:
+    - name: Send config to runner
+      shell: |
+        python3 send_config.py {{ ansible_host }} '{{ config_json }}'
       args:
         chdir: "{{ project_dir }}"
