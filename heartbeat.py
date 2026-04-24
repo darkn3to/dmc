@@ -3,6 +3,7 @@ import time
 import multiprocessing
 import json
 import os
+from datetime import datetime
 
 log_file = "heartbeats.log"
 json_file = "heartbeats.json"
@@ -30,11 +31,42 @@ class MasterNode:
         for worker_id in self.known_workers:
             self.worker_status[worker_id] = "unknown"
 
+    def _format_timestamp(self, ts: int) -> str:
+        return datetime.fromtimestamp(ts).strftime("%d/%m/%Y %H:%M:%S")
+
+    def _parse_timestamp(self, value):
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str):
+            try:
+                return int(datetime.strptime(value, "%d/%m/%Y %H:%M:%S").timestamp())
+            except ValueError:
+                return None
+        return None
+
+    def _save_heartbeats(self):
+        serializable = {
+            worker_id: self._format_timestamp(ts)
+            for worker_id, ts in dict(self.heartbeats).items()
+        }
+        with open(json_file + ".tmp", "w") as f:
+            json.dump(serializable, f, indent=4)
+        os.replace(json_file + ".tmp", json_file)
+
     def _load_initial_heartbeats(self):
         if os.path.exists(json_file):
             try:
                 with open(json_file, "r") as f:
-                    return json.load(f)
+                    raw = json.load(f)
+                if not isinstance(raw, dict):
+                    return {}
+
+                parsed = {}
+                for worker_id, value in raw.items():
+                    ts = self._parse_timestamp(value)
+                    if ts is not None:
+                        parsed[worker_id] = ts
+                return parsed
             except (json.JSONDecodeError, ValueError):
                 return {}
         return {}
@@ -79,9 +111,7 @@ class MasterNode:
                                 self.known_workers.remove(worker_id)
                                 self.worker_status.pop(worker_id, None)
                                 self.heartbeats.pop(worker_id, None)
-                                with open(json_file + ".tmp", "w") as f:
-                                    json.dump(dict(self.heartbeats), f, indent=4)
-                                os.replace(json_file + ".tmp", json_file)
+                                self._save_heartbeats()
                                 print(
                                     f"-- Worker [{worker_id}] REMOVED after {time_since}s offline"
                                 )
@@ -109,13 +139,11 @@ class MasterNode:
 
                     with self.lock:
                         self.heartbeats[worker_id] = timestamp
-                        with open(json_file + ".tmp", "w") as f:
-                            json.dump(dict(self.heartbeats), f, indent=4)
-                        os.replace(json_file + ".tmp", json_file)
+                        self._save_heartbeats()
                 else:
                     msg = f"UNKNOWN worker {worker_id} at {addr[0]}\n"
 
-                print(msg.strip())
+                #print(msg.strip())
                 with open(log_file, "a") as f:
                     f.write(msg)
     

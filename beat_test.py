@@ -24,16 +24,19 @@ def worker_wrapper(master_ip, worker_id, interval, reliability):
     except:
         pass
 
-def worker_process(master_ip, worker_id, interval, reliability):
+def worker_process(master_ip, worker_id, interval, reliability, min_uptime):
     """
     Worker process that sends heartbeats until it crashes.
+    It will stay alive for at least min_uptime seconds before crash checks begin.
     """
     print(f"--- [START] {worker_id} is now online ---")
     worker = WorkerNode(master_ip, worker_id, interval)
+    start_time = time.time()
     
     while True:
-        # Simulate a crash: random chance to stop
-        if random.random() > reliability:
+        elapsed = time.time() - start_time
+        # Allow crash checks only after minimum guaranteed runtime.
+        if elapsed >= min_uptime and random.random() > reliability:
             print(f"--- [CRASH] {worker_id} has stopped! ---")
             return
         
@@ -52,8 +55,9 @@ if __name__ == "__main__":
     known_workers = ["Node-A", "Node-B"]
     # Master waits 15 seconds before declaring offline
     threshold = 10 
+    min_runtime_after_restart = threshold + 5
     
-    # Create master with integrated Manager for shared memory
+    # Master owns its own Manager for shared memory.
     master = MasterNode(known_workers=known_workers, min_heartbeat_threshold=threshold)
 
     # Start Master background tasks with multiprocessing
@@ -92,7 +96,7 @@ if __name__ == "__main__":
 
                     p = multiprocessing.Process(
                         target=worker_process, 
-                        args=("127.0.0.1", name, interval, rel),
+                        args=("127.0.0.1", name, interval, rel, min_runtime_after_restart),
                         daemon=True
                     )
                     p.start()
@@ -101,4 +105,3 @@ if __name__ == "__main__":
             time.sleep(1) 
     except KeyboardInterrupt:
         print("\nSimulation ended.")
-        master.manager.shutdown()
