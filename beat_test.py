@@ -1,7 +1,7 @@
 from dmc_fault.heartbeat import MasterNode, WorkerNode
 import time
 import multiprocessing
-import random
+import random 
 
 def worker_wrapper(master_ip, worker_id, interval, reliability):
     """

@@ -31,9 +31,7 @@ class SmartManager:
         self.path = checkpoint_path
         self.device = device
         self.seed = seed
-        self.stop_requested = False
-        
-        self.autosave_interval = 30  
+        self.stop_requested = False 
         
         self.last_save_time = time.time()
         

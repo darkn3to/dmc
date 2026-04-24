@@ -5,21 +5,21 @@ import json
 import os
 from datetime import datetime
 
-log_file = "heartbeats.log"
-json_file = "heartbeats.json"
-
-
 class MasterNode:
     def __init__(
         self,
         known_workers: list = [],
         heartbeat_interval: int = 5,
         min_heartbeat_threshold: int = 15,
+        json_file: str = "heartbeats.json",
+        log_file: str = "heartbeats.log"
     ):
         self.manager = multiprocessing.Manager()
         self.known_workers = self.manager.list(known_workers)
         self.heartbeat_interval = heartbeat_interval
         self.min_heartbeat_threshold = min_heartbeat_threshold
+        self.json_file = json_file
+        self.log_file = log_file
 
         self.heartbeats = self.manager.dict()
         self.lock = self.manager.Lock()
@@ -49,14 +49,14 @@ class MasterNode:
             worker_id: self._format_timestamp(ts)
             for worker_id, ts in dict(self.heartbeats).items()
         }
-        with open(json_file + ".tmp", "w") as f:
+        with open(self.json_file + ".tmp", "w") as f:
             json.dump(serializable, f, indent=4)
-        os.replace(json_file + ".tmp", json_file)
+        os.replace(self.json_file + ".tmp", self.json_file)
 
     def _load_initial_heartbeats(self):
-        if os.path.exists(json_file):
+        if os.path.exists(self.json_file):
             try:
-                with open(json_file, "r") as f:
+                with open(self.json_file, "r") as f:
                     raw = json.load(f)
                 if not isinstance(raw, dict):
                     return {}
@@ -144,7 +144,7 @@ class MasterNode:
                     msg = f"UNKNOWN worker {worker_id} at {addr[0]}\n"
 
                 #print(msg.strip())
-                with open(log_file, "a") as f:
+                with open(self.log_file, "a") as f:
                     f.write(msg)
     
     def start_host(self):
