@@ -33,7 +33,7 @@ class SmartManager:
         self.seed = seed
         self.stop_requested = False
         
-        self.autosave_interval = 30
+        self.autosave_interval = 30  
         
         self.last_save_time = time.time()
         

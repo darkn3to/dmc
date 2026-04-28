@@ -1,0 +1,1969 @@
+[INIT] Logger Initialized | Rank: 0
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=10
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=20
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=30
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=40
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=50
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=60
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=70
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=80
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=90
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=100
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=110
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=120
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=130
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=140
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=150
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=160
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=170
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=180
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=190
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 1
+Avg. Loss: 1.6561
+Time: 264.68s
+Forward Time: 32.25s
+Backward Time: 62.67s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=200
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=210
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=220
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=230
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=240
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=250
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=260
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=270
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=280
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=290
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=300
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=310
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=320
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=330
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=340
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=350
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=360
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=370
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=380
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=390
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 2
+Avg. Loss: 1.2201
+Time: 277.15s
+Forward Time: 32.08s
+Backward Time: 62.64s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=400
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=410
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=420
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=430
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=440
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=450
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=460
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=470
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=480
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=490
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=500
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=510
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=520
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=530
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=540
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=550
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=560
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=570
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=580
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 3
+Avg. Loss: 0.9912
+Time: 290.02s
+Forward Time: 32.09s
+Backward Time: 62.64s
+[INFO] local step, no sync
+[SYNC] step=590
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=600
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=610
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=620
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=630
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=640
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=650
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=660
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=670
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=680
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=690
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=700
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=710
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=720
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=730
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=740
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=750
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=760
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=770
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=780
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 4
+Avg. Loss: 0.8414
+Time: 310.08s
+Forward Time: 32.10s
+Backward Time: 62.65s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=790
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=800
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=810
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=820
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=830
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=840
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=850
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=860
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=870
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=880
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=890
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=900
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=910
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=920
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=930
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=940
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=950
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=960
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=970
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=980
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+Epoch 5
+Avg. Loss: 0.7140
+Time: 293.08s
+Forward Time: 32.09s
+Backward Time: 62.65s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=990
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1000
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1010
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1020
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1030
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1040
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1050
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1060
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1070
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1080
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1090
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1100
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1110
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1120
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1130
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1140
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1150
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1160
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1170
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 6
+Avg. Loss: 0.6227
+Time: 284.10s
+Forward Time: 32.10s
+Backward Time: 62.65s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1180
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1190
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1200
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1210
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1220
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1230
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1240
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1250
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1260
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1270
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1280
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1290
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1300
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1310
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1320
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1330
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1340
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1350
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1360
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1370
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 7
+Avg. Loss: 0.5428
+Time: 314.32s
+Forward Time: 32.08s
+Backward Time: 62.66s
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1380
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1390
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1400
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1410
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1420
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1430
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1440
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1450
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1460
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1470
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1480
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1490
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1500
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1510
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1520
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1530
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1540
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1550
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1560
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+Epoch 8
+Avg. Loss: 0.4688
+Time: 297.99s
+Forward Time: 32.09s
+Backward Time: 62.66s
+[INFO] local step, no sync
+[SYNC] step=1570
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1580
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1590
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1600
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1610
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1620
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1630
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1640
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1650
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1660
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1670
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1680
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1690
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1700
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1710
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1720
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1730
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1740
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync
+[SYNC] step=1750
+[TEST] Param consistency | abs diff=0.000e+00, rel diff=0.000e+00 (0.0000%)
+[INFO] local step, no sync
+[INFO] local step, no sync
+[INFO] local step, no sync

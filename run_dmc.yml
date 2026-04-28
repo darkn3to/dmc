@@ -2,14 +2,15 @@
   hosts: all
   gather_facts: yes
   vars:
-    project_dir: "{{ ansible_env.HOME }}/dmc"
+    project_dir: "{{ ansible_env.HOME }}/dmc-dmc_refactored"
 
   tasks:
-    - name: Start runner (only if not already running)
+    - name: Start runner (reliable)
       shell: |
-        pgrep -f runner.py || nohup python3 runner.py > runner.log 2>&1 &
+       cd {{ project_dir }}
+       nohup python3 -u runner.py > runner.log 2>&1 &
       args:
-        chdir: "{{ project_dir }}"
+        executable: /bin/bash
 
 - name: Wait for runners to be ready
   hosts: localhost
@@ -21,21 +22,22 @@
   hosts: all
   gather_facts: no
   vars:
-    project_dir: "{{ ansible_env.HOME }}/dmc"
-
-    config_json: >-
-      {{
-        {
-          "nnodes": groups['all'] | length,
-          "rank": groups['all'].index(inventory_hostname),
-          "master_addr": hostvars[groups['master'][0]].ansible_host,
-          "script": "test2.py"
-        } | to_json
-      }}
+    project_dir: "{{ ansible_env.HOME }}/dmc-dmc_refactored"
+    config_path: "{{ project_dir }}/config.json"
 
   tasks:
+    - name: Write config file
+      copy:
+        dest: "{{ config_path }}"
+        content: |
+          {
+            "nnodes": {{ groups['all'] | length }},
+            "rank": {{ groups['all'].index(inventory_hostname) }},
+            "master_addr": "{{ hostvars[groups['master'][0]].ansible_host }}",
+            "script": "multinode_demo.py"
+          }
+
     - name: Send config to runner
-      shell: |
-        python3 send_config.py {{ ansible_host }} '{{ config_json }}'
+      shell: python3 send_config.py {{ ansible_host }} {{ config_path }}
       args:
         chdir: "{{ project_dir }}"

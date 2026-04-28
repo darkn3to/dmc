@@ -1,6 +1,7 @@
 import torch
 import math
 from tests.tests import Tests
+import os
 from logger import Logger
 
 class DMC(torch.optim.Optimizer):
@@ -22,7 +23,12 @@ class DMC(torch.optim.Optimizer):
         super().__init__(optimizer.param_groups, defaults=getattr(optimizer, "defaults", {}))
 
         if not torch.distributed.is_initialized():
-            torch.distributed.init_process_group(backend=backend)
+            torch.distributed.init_process_group(
+                backend=backend,
+                init_method="env://",
+                world_size=int(os.environ["WORLD_SIZE"]),
+                rank=int(os.environ["RANK"])
+            )
 
         params = []
         for g in self.inner_optimizer.param_groups:
@@ -53,7 +59,7 @@ class DMC(torch.optim.Optimizer):
         self.tau_max = 100
 
         # Hard cap on max local steps to avoid local divergence.
-        self.max_local_steps = 500
+        self.max_local_steps = 10
 
     def _log(self, *args, rank0_only=False) -> None:
         message = " ".join(map(str, args))
@@ -99,36 +105,50 @@ class DMC(torch.optim.Optimizer):
                 self.loss_0 = None
                 return
 
+        # -------------------------------
+        # GLOBAL SYNC DECISION (FIX)
+        # -------------------------------
+        should_sync = 0
+
+        # local decision
+        if self.step_count % self.max_local_steps == 0:
+            should_sync = 1
+
+        elif self.step_count % self.tau == 0:
+            should_sync = 1
+
+        # convert to tensor
+        device = self.all_params[0].device
+        should_sync_tensor = torch.tensor(should_sync, device=device)
+
+        # GLOBAL AGREEMENT
+        torch.distributed.all_reduce(
+            should_sync_tensor, 
+            op=torch.distributed.ReduceOp.MAX
+        )
+
         did_sync = False
 
-        if self.step_count % self.tau != 0 and self.rank == 0:
-            if self.debug:
-                self.logger.log("[INFO] local step, no sync")
-            
-            '''
-            with torch.no_grad():
-                norm = torch.norm(self.all_params[0])
-                if self.debug:
-                    print(f"[DEBUG] step={self.step_count}, param_norm={norm:.4f}")
-            '''
+        if should_sync_tensor.item() == 1:
+            if self.rank == 0 and self.debug:
+                self.logger.log(f"[SYNC] step={self.step_count}")
 
-        # Hard cap case!
-        if self.step_count % self.max_local_steps == 0:
-            if self.rank == 0:
-                if self.debug:
-                    self.logger.log(f"[CAP SYNC] step={self.step_count}")
             self.sync_parameters()
             did_sync = True
 
-        if (self.step_count % self.tau == 0) and not did_sync:
-            self.sync_parameters()
             if loss is not None:
                 avg_loss = self.reduce_scalar(loss)
                 self.adapt_tau(avg_loss)
-                self.logger.log(f"Trying to adapt tau: new tau = {self.tau}", rank0_only=True)
-        
+                self.logger.log(
+                    f"Trying to adapt tau: new tau = {self.tau}", 
+                    rank0_only=True
+                )
+        else:
+            if self.rank == 0 and self.debug:
+                self.logger.log("[INFO] local step, no sync")
+
         if self.tests and did_sync:
-            Tests(self.all_params, self.logger).param_consistency()  
+            Tests(self.all_params, self.logger).param_consistency()
                
 
     # Synchronize model parameters across all processes.
@@ -138,7 +158,7 @@ class DMC(torch.optim.Optimizer):
             for p in self.all_params:
                 torch.distributed.all_reduce(p.data, op=torch.distributed.ReduceOp.SUM)  
                 p.data /= self.world_size
-        torch.distributed.barrier()
+        
 
     # Adapt tau according to the loss value. 
     def adapt_tau(self, loss) -> None:

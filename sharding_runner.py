@@ -6,7 +6,6 @@ from dmc_sharding import (
     shard_groups_to_archives
 )
 
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Load dataset, create logical groups, and shard into archives."

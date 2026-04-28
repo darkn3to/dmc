@@ -5,7 +5,6 @@ import json
 import os
 from datetime import datetime
 
-
 class MasterNode:
     def __init__(
         self,

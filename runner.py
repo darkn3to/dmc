@@ -5,19 +5,45 @@ import threading
 import os
 import signal
 import time
-from dmc_fault.heartbeat import *
+import shlex
+import utils
 
 CONFIG_PORT = 5005
 BUFFER_SIZE = 4096
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 current_proc = None
 current_config = None
+
+
+def infer_socket_ifname(master_addr):
+    try:
+        cmd = f"ip route get {shlex.quote(master_addr)}"
+        output = subprocess.check_output(cmd, shell=True, text=True, stderr=subprocess.DEVNULL)
+    except subprocess.CalledProcessError:
+        return None
+
+    tokens = output.strip().split()
+    if "dev" in tokens:
+        idx = tokens.index("dev")
+        if idx + 1 < len(tokens):
+            return tokens[idx + 1]
+    return None
 
 
 def start_training(config):
     global current_proc
 
     time.sleep(2)  # ensure all nodes got config
+
+    script_path = config["script"]
+    if not os.path.isabs(script_path):
+        script_path = os.path.join(BASE_DIR, script_path)
+    script_path = os.path.abspath(script_path)
+
+    if not os.path.exists(script_path):
+        print(f"[RUNNER] Script not found: {script_path}")
+        return
 
     cmd = [
         "python3", "-u", "-m", "torch.distributed.run",
@@ -26,12 +52,31 @@ def start_training(config):
         "--node_rank", str(config["rank"]),
         "--master_addr", config["master_addr"],
         "--master_port", "29500",
-        config["script"]
+        script_path
     ]
 
     print(f"[RUNNER] Starting training: {cmd}")
 
-    current_proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
+    env = os.environ.copy()
+    env["MASTER_ADDR"] = config["master_addr"]
+    env["MASTER_PORT"] = "29500"
+    env["NCCL_IB_DISABLE"] = "1"
+    env["NCCL_DEBUG"] = "WARN"
+    env["NCCL_DEBUG_SUBSYS"] = "ALL"
+    env["NCCL_P2P_DISABLE"] = "1"
+
+    if utils.find_own_ip() == config["master_addr"]:
+        ifname = config.get("master_ifname")
+    else:    
+        ifname = infer_socket_ifname(config["master_addr"]) 
+    if ifname:
+        env.setdefault("NCCL_SOCKET_IFNAME", ifname)     
+        env.setdefault("GLOO_SOCKET_IFNAME", ifname)
+        print(f"[RUNNER] Using interface {ifname} ...")
+    else:
+        print("[RUNNER] Could not infer interface; using default interface selection")
+
+    current_proc = subprocess.Popen(cmd, preexec_fn=os.setsid, env=env, cwd=BASE_DIR)
 
 
 def stop_training():
@@ -43,6 +88,7 @@ def stop_training():
         current_proc.wait()
         print("[RUNNER] Training stopped.")
 
+    os.system("pkill -f torch.distributed.run || true")
     current_proc = None
 
 
@@ -81,12 +127,6 @@ def monitor_process():
 if __name__ == "__main__":
     threading.Thread(target=config_listener, daemon=True).start()
     threading.Thread(target=monitor_process, daemon=True).start()
-    if current_config:
-        if str(current_config["rank"])=="0":
-            heartbeat_receiver= MasterNode(master_ip=current_config["master_addr"], heartbeat_interval=5, min_heartbeat_threshold=10,json_file="broadcast/placement_map.json")
-            threading.Thread(target=heartbeat_receiver.start_host, daemon=True).start()
-        else:
-            heartbeat_sender=WorkerNode(master_ip=current_config["master_addr"], heartbeat_interval=5)
-            threading.Thread(target=heartbeat_sender.send_heartbeats, daemon=True).start()
+
     while True:
         time.sleep(10)
