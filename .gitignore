@@ -5,3 +5,6 @@ logs/
 *.out
 *.pth
 *.txt
+local_shards/
+shards_output/
+archive/
