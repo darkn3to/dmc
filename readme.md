@@ -97,11 +97,13 @@ While not fully implemented, DMC architecture was designed keeping fault toleran
 ## Limitations
 
 • Fault tolerance is not yet implemented.
+
 • Requires controlled network environment (LAN preferred).
 
 ## Future Scope
 
 • Robust fault tolerance with seamless recovery
+
 • Improved monitoring and metrics
 
 ### This project was tested on Ubuntu 22.04.
